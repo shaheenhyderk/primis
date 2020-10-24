@@ -15,7 +15,7 @@ class CompanyLogin(APIView):
         print(request.data['password'])
         if company is not None:
             if check_password(request.data['password'], company.password):
-                return Response(status=status.HTTP_200_OK)
+                return Response({"companyId": company.id}, status=status.HTTP_200_OK)
         return Response(status=status.HTTP_401_UNAUTHORIZED)
 
 
