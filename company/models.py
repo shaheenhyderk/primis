@@ -23,7 +23,7 @@ class AptitudeQuestions(models.Model):
 
 class SpecificQuestions(models.Model):
     id = models.CharField(max_length=50, primary_key=True)
-    question = models.CharField(max_length=255)
+    question = models.TextField()
     choice1 = models.CharField(max_length=255)
     choice2 = models.CharField(max_length=255)
     choice3 = models.CharField(max_length=255)

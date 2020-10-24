@@ -4,27 +4,12 @@ from rest_framework import status
 from rest_framework.views import APIView
 from django.contrib.auth.hashers import check_password
 import uuid
-import xlrd
+from candidate.serializers import SpecificQuestionsSerializer
 
 
 # Create your views here.
 
 class CompanyLogin(APIView):
-    # def get(self, request):
-    #     path = "D:\shahe\Downloads\Aptitude.xlsx"
-    #     wb = xlrd.open_workbook(path)
-    #     sheet = wb.sheet_by_index(0)
-    #     for i in range(15, 17):
-    #         aptitude_questions = AptitudeQuestions.objects.create(id=uuid.uuid1(), question=str(sheet.cell_value(i, 0)),
-    #                                                               choice1=str(sheet.cell_value(i, 1)),
-    #                                                               choice2=str(sheet.cell_value(i, 2)),
-    #                                                               choice3=str(sheet.cell_value(i, 3)),
-    #                                                               choice4=str(sheet.cell_value(i, 4)),
-    #                                                               answer=str(sheet.cell_value(i, 5)))
-    #         aptitude_questions.save()
-    #
-    #     return Response(status=status.HTTP_200_OK)
-
     def post(self, request):
         company = Details.objects.filter(email=request.data['email']).first()
         if company is not None:
@@ -34,8 +19,22 @@ class CompanyLogin(APIView):
 
 
 class CompanyQuestion(APIView):
-    def get(self, request):
-        return Response(status=status.HTTP_200_OK)
+    def get(self, request, id):
+        data_list = []
+        job_openings = JobOpenings.objects.filter(company_id=id)
+        for x in job_openings:
+            question_index = QuestionIndex.objects.filter(job_opening_id=x.id).values('question_id')
+            question_index_list = []
+            for y in question_index:
+                question_index_list.append(y["question_id"])
+            specific_questions = SpecificQuestions.objects.filter(pk__in=question_index_list)
+            sub_data = {
+                "jobOpeningId":x.id,
+                "jobOpeningTitle": x.name,
+                "questions":SpecificQuestionsSerializer(specific_questions, many=True).data
+            }
+            data_list.append(sub_data)
+        return Response(data_list, status=status.HTTP_200_OK)
 
     def post(self, request):
         job_opening = JobOpenings.objects.create(id=uuid.uuid1(), name=request.data['jobOpening'],

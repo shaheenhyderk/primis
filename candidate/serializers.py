@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from company.models import JobOpenings, Details, AptitudeQuestions
+from company.models import JobOpenings, Details, AptitudeQuestions, SpecificQuestions
 
 
 class JObOpeningSerializer(serializers.ModelSerializer):
@@ -17,4 +17,10 @@ class CompanyDetailSerializer(serializers.ModelSerializer):
 class AptitudeQuestionsSerializer(serializers.ModelSerializer):
     class Meta:
         model = AptitudeQuestions
+        fields = "__all__"
+
+
+class SpecificQuestionsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SpecificQuestions
         fields = "__all__"
