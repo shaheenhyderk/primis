@@ -24,7 +24,7 @@ SECRET_KEY = 'quf=!d@6+*tr*d=9kp7^sci^c7yc0l#0$rf4z0e71ti*ccd_9r'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['631136d22786.ngrok.io']
+ALLOWED_HOSTS = ['631136d22786.ngrok.io', '127.0.0.1']
 
 # Application definition
 
@@ -125,8 +125,8 @@ STATIC_URL = '/static/'
 JWT_SECRET_KEY = "asd"
 CORS_ORIGIN_ALLOW_ALL = True
 
-REST_FRAMEWORK = {
-    'DEFAULT_RENDERER_CLASSES': (
-        'rest_framework.renderers.JSONRenderer',
-    )
-}
+# REST_FRAMEWORK = {
+#     'DEFAULT_RENDERER_CLASSES': (
+#         'rest_framework.renderers.JSONRenderer',
+#     )
+# }

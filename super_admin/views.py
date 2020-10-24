@@ -27,7 +27,8 @@ class AdminCompanies(APIView):
     def post(self, request):
         password = make_password(request.data['password'])
         details = Details.objects.create(id=uuid.uuid1(), name=request.data['name'], username=request.data['username'],
-                                         email=request.data['email'], phone=request.data['phone'], password=password)
+                                         email=request.data['email'], phone=request.data['phone'],
+                                         password=password)
         details.save()
         return Response(status=status.HTTP_200_OK)
 
