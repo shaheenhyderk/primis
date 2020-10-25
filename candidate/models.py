@@ -10,6 +10,7 @@ class PersonalDetails(models.Model):
     qualification = models.CharField(max_length=100)
     job_opening_id = models.CharField(max_length=50)
     project = models.CharField(max_length=255)
+    experience = models.IntegerField()
     why_hire_you = models.TextField()
     status = models.CharField(max_length=50)
     aptitude_result = models.IntegerField()
@@ -33,4 +34,3 @@ class SkillResult(models.Model):
     question = models.TextField()
     answer = models.CharField(max_length=50)
     correct = models.BooleanField()
-
