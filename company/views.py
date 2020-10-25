@@ -5,6 +5,8 @@ from rest_framework.views import APIView
 from django.contrib.auth.hashers import check_password
 import uuid
 from candidate.serializers import SpecificQuestionsSerializer
+from .serializers import PersonalDetailsSerializer
+from candidate.models import PersonalDetails
 
 
 # Create your views here.
@@ -75,4 +77,5 @@ class CompanyQuestionEdit(APIView):
 
 class CompanyDashboard(APIView):
     def get(self, request, id):
-        return Response(status=status.HTTP_200_OK)
+        personal_details = PersonalDetails.objects.filter(company_id=id)
+        return Response(PersonalDetailsSerializer(personal_details, many=True), status=status.HTTP_200_OK)

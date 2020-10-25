@@ -55,7 +55,7 @@ class CandidateSubmit(APIView):
         skill_marks = correct_skill / len(request.data["skillQuestions"]) * 70
         skill_marks_percent = correct_skill / len(request.data["skillQuestions"]) * 100
         total_marks = experience_marks + aptitude_marks + skill_marks
-        personal_details = PersonalDetails.objects.create(id=uuid.uuid1(), name=request.data["name"],
+        personal_details = PersonalDetails.objects.create(id=uuid.uuid1(), company_id=request.data["companyId"], name=request.data["name"],
                                                           email=request.data["email"], phone=request.data["phone"],
                                                           qualification=request.data["qualification"],
                                                           job_opening_id=request.data["jobOpeningId"],

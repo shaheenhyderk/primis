@@ -4,6 +4,7 @@ from django.db import models
 # Create your models here.
 class PersonalDetails(models.Model):
     id = models.CharField(max_length=50, primary_key=True)
+    company_id = models.CharField(max_length=50)
     name = models.CharField(max_length=100)
     email = models.CharField(max_length=50)
     phone = models.CharField(max_length=50)
